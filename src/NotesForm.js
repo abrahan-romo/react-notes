@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Fab from "@material-ui/core/Fab";
 import Icon from "@material-ui/core/Icon";
 
-const NotesForm = ({title, description, updateField, saveNote}) => {
+const NotesForm = ({title, description, updateField, saveNote, deleteNote}) => {
     return (
         <React.Fragment>
             <Grid item xs={12}>

@@ -12,7 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from "@material-ui/core/Typography";
 import {Link} from "react-router-dom";
 
-const NotesList = ({notes}) => {
+const NotesList = ({notes, deleteNote}) => {
     return(
         
             <List>
@@ -23,7 +23,7 @@ const NotesList = ({notes}) => {
                     <ListItem key={index} button component={Link} to={`/view/${note.id}`}>
                     <ListItemText primary={note.title} />
                     <ListItemSecondaryAction>
-                        <IconButton>
+                        <IconButton onClick={() => deleteNote(note.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </ListItemSecondaryAction>

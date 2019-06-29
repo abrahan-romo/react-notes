@@ -1,12 +1,8 @@
 import React from "react";
 import Typography from "@material-ui/core/Typography";
 
-const Note = props => {
-    const note = props.notes.filter(
-        note => note.id === parseInt(props.match.params.id)
-    )[0];
-
-    console.log("los props going out " + props);
+const Note = ({ note }) => {
+    
 
     return(
 

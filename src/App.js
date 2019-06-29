@@ -8,7 +8,7 @@ import NotesList from "./NotesList";
 import Home from "./Home";
 import Note from "./Note";
 
-import { Link, Route} from "react-router-dom";
+import { Link, Route, Redirect} from "react-router-dom";
 
 
 
@@ -96,6 +96,20 @@ class App extends React.Component {
             this.setState({description: event.target.value});
         }   
     };
+
+    deleteNote = id => {
+    this.setState({
+        notes: this.state.notes.filter(note => note.id !== id)
+    });
+    };
+
+    filterNote = id => {
+        return this.state.notes.filter(note => note.id === parseInt(id)) [0];
+    };
+
+    //console.log("los props going out " + props);
+
+
   
 
     render() {
@@ -121,7 +135,7 @@ class App extends React.Component {
                 <Grid container justify='center' spacing={2}>
                     
                     <Grid item xs = {4}>
-                        <NotesList notes={this.state.notes} />
+                        <NotesList notes={this.state.notes} deleteNote={this.deleteNote}/>
                     </Grid>    
 
 
@@ -138,13 +152,17 @@ class App extends React.Component {
                             description={this.state.description}
                             updateField={this.updateField}
                             saveNote={this.saveNote}
+                            
                             />
                             )}
                             />
         
                         <Route 
                             path="/view/:id" 
-                            render={props => <Note {...props} notes={this.state.notes} /> }
+                            render={ props => {
+                                const note = this.filterNote(props.match.params.id);
+                                return note ? <Note note = {note} /> : <Redirect to="/" />
+                            }}
                         />                                
 
                     </Grid>
